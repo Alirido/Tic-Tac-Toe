@@ -1,0 +1,4 @@
+Transition function :
+qo p1c5 p2c5 p3c5 p4c5 p5c1 p6c5 p7c5 p8c5 p9c5
+p1c5 0 p12c53 p13c52 p14c57 0 p16c53 p17c54 p18c57 p19c52
+p2c5 
