@@ -1,7 +1,12 @@
 #include <stdio.h>
 
 int main() {
-	// BACA FILE EXTERNAL
+	// READ TEXT FILE (EXTERNAL)
+	FILE *fp; // fp = file pointer
+	fp = fopen("DFA.TXT", "r");
+
+
+	fclose(fp);
 
 	// FUNGSI UNTUK MENERJEMAHKAN INPUT KEDALAM LOGIKA MACHINE
 
