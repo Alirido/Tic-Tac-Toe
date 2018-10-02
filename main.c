@@ -29,6 +29,22 @@ int hashing(char temp[]) { // String to int (hashing)
 	return result;
 }
 
+void showInstructions() {
+	printf("\t\t\t  Tic-Tac-Toe\n\n"); 
+    printf("Choose a cell numbered from 1 to 9 as below"
+            " and play\n\n"); 
+      
+    printf("\t\t\t  1 | 2  | 3  \n"); 
+    printf("\t\t\t--------------\n"); 
+    printf("\t\t\t  4 | 5  | 6  \n"); 
+    printf("\t\t\t--------------\n"); 
+    printf("\t\t\t  7 | 8  | 9  \n\n"); 
+    printf("Player will play as X.\n");
+    printf("Computer will play as O.\n");
+      
+    printf("-\t-\t-\t-\t-\t-\t-\t-\t-\t-\n\n"); 
+}
+
 int main() {
 	// READ TEXT FILE (EXTERNAL) and Translate to machine logic
 	FILE *fp; // fp = file pointer
@@ -132,8 +148,6 @@ int main() {
 	for (int j=0; j<i; j++) {
 		printf("%s ", tf[trackRecord[j]].state);
 	}
-
-	// SETELAH MENCAPAI FINAL STATE, KELUARKAN PESAN ENTAH DRAW, LOSE, ATAU WIN
 
 	return 0;
 }
