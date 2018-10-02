@@ -5,8 +5,20 @@
 #define false 0
 #define emptyString ""
 
-int tf[60000][10]; // Transition Function
-bool win[60000], draw[60000]; // Final State
+struct TransitionFunction {
+	char state[12];
+	int action[10]; // input 1 . . 9
+	int fs;
+	/*
+		fs -> final state
+		0 = Not final state
+		1 = Win
+		2 = Draw
+	*/ 
+} tf[60000];
+
+// TransitionFunction tf[60000][10];
+// bool win[60000], draw[60000]; // Final State
 
 bool isWin(char temp[]) {
 	// Check if state(string) is final state or not
@@ -27,7 +39,7 @@ bool isWin(char temp[]) {
 int hashing(char temp[]) { // String to int (hashing)
 	int i=1;
 	result = 0;
-	if (temp != "qo") {
+	if (temp != "qo" || temp != '0') {
 		while (temp[i] != 'c' ||) {
 			result = (temp[i]-'0') + result*10;
 			i++;
@@ -37,8 +49,7 @@ int hashing(char temp[]) { // String to int (hashing)
 }
 
 int main() {
-	// Deklarasi variable
-	// READ TEXT FILE (EXTERNAL)
+	// READ TEXT FILE (EXTERNAL) and Translate to machine logic
 	FILE *fp; // fp = file pointer
 	
 	if ((fp = fopen("DFA.TXT", "r")) == null) {
@@ -58,7 +69,7 @@ int main() {
 		if (s == "Transition function") {
 			while (c != EOF) {
 				if ((c = fgetc()) != '*') {
-					int j=0;
+					int j=0, idx;
 					while (c != '\n' && c != EOF) {
 						char tmp[13];
 						i=0;
@@ -67,12 +78,18 @@ int main() {
 							i++;
 							c = fgetc();
 						}
-						if (!j)
-
+						if (!j) {
+							idx = hashing(tmp);
+							strcpy(tf[idx].state, tmp);
+						}
+						else {
+							tf[idx].action[j] = hashing(tmp);
+						}
+						j++;
 						if (c==' ')
 							c = fgetc();
 					}
-				}
+				} else while ((c = fgetc()) != '\n');
 			}
 		} else if (s == "State akhir") {
 			while (c != '\n') {
@@ -82,9 +99,14 @@ int main() {
 					tmp[i] = c;
 					i++;
 				}
-				if (isWin(tmp))
-					win[hashing(tmp)] = true;
-				else draw[hashing(tmp)] = true;
+				int idx = hashing(tmp);
+				if (isWin(tmp)) {
+					tf[idx].fs = 1;
+				}
+				else {
+					tf[idx].fs = 2;
+				}
+				strcpy(tf[idx].state, tmp);
 			}
 		} else {
 			while ((c = fgetc()) != '\n');
@@ -93,9 +115,9 @@ int main() {
 
 	fclose(fp);
 
-	// FUNGSI UNTUK MENERJEMAHKAN INPUT KEDALAM LOGIKA MACHINE
-
 	// MULAI PERMAINAN TIC TAC TOE
+	printf("")
+
 	// MINTA PLAYER UNTUK MEMASUKKAN AKSI BERUPA INT DARI 1 - 9
 	// SETIAP AKSI TAMPILKAN CURRENT BOARD
 	// GUNAKAN FUNGSI UNTUK MMENJALAN SETIAP AKSI PADA MACHINE
