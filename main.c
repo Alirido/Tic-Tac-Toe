@@ -12,29 +12,10 @@ struct TransitionFunction {
 	/*
 		fs -> final state
 		0 = Not final state
-		1 = Win
+		1 = Computer Win
 		2 = Draw
 	*/ 
 } tf[60000];
-
-// TransitionFunction tf[60000][10];
-// bool win[60000], draw[60000]; // Final State
-
-bool isWin(char temp[]) {
-	// Check if state(string) is final state or not
-	bool a[10] = {false};
-	int n = strlen(temp);
-	while (temp[n-1] != 'c') {
-		a[temp[n-1]-'0'] = true;
-		n--;
-	}
-	if ((a[1] && a[2] && a[3]) || (a[4] && a[5] && a[6]) ||
-		(a[7] && a[8] && a[9]) || (a[1] && a[4] && a[7]) ||
-		(a[2] && a[5] && a[8]) || (a[3] && a[6] && a[9]) ||
-		(a[1] && a[5] && a[9]) || (a[3] && a[5] && a[7]))
-		return true;
-	else return false;
-}
 
 int hashing(char temp[]) { // String to int (hashing)
 	int i=1;
@@ -117,9 +98,10 @@ int main() {
 
 	// MULAI PERMAINAN TIC TAC TOE
 	showInstructions();
-	int current_state=0, x;
-	int board[10] = {0};
-	viewBoard();
+	int current_state=0;
+	int trackRecord[10] = {0}; // For showing what states have been passed
+	int i = 1, x;
+	viewBoard(current_state);
 	while (tf[current_state].fs != 1 && tf[current_state].fs != 2) {
 		printf("Enter the number: ");
 		scanf("%d", &x);
@@ -134,11 +116,22 @@ int main() {
 		}
 
 		current_state = tf[current_state].action[x];
+		trackRecord[i] = current_state;
+		viewBoard(current_state);
+		i++;
 	}
 
-	// MINTA PLAYER UNTUK MEMASUKKAN AKSI BERUPA INT DARI 1 - 9
-	// SETIAP AKSI TAMPILKAN CURRENT BOARD
-	// GUNAKAN FUNGSI UNTUK MMENJALAN SETIAP AKSI PADA MACHINE
+	if (tf[current_state].fs == 1) {
+		printf("Well played! Unfortunately, Computer has won\n");
+	} else {
+		printf("DRAW. You were doing great\n");
+	}
+	printf("Try again later :)\n\n");
+	
+	printf("States that have been passed:\n")
+	for (int j=0; j<i; j++) {
+		printf("%s ", tf[trackRecord[j]].state);
+	}
 
 	// SETELAH MENCAPAI FINAL STATE, KELUARKAN PESAN ENTAH DRAW, LOSE, ATAU WIN
 
