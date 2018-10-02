@@ -116,7 +116,25 @@ int main() {
 	fclose(fp);
 
 	// MULAI PERMAINAN TIC TAC TOE
-	printf("")
+	showInstructions();
+	int current_state=0, x;
+	int board[10] = {0};
+	viewBoard();
+	while (tf[current_state].fs != 1 && tf[current_state].fs != 2) {
+		printf("Enter the number: ");
+		scanf("%d", &x);
+		while (!isValid(x)) {
+			if (x>=1 && x<=9) {
+				printf("The cell number was already filled\n");
+			} else {
+				printf("Invalid input - Please enter a number between 1 and 9 (inclusive)\n");
+			}
+			printf("Enter the number: ");
+			scanf("%d", &x);
+		}
+
+		current_state = tf[current_state].action[x];
+	}
 
 	// MINTA PLAYER UNTUK MEMASUKKAN AKSI BERUPA INT DARI 1 - 9
 	// SETIAP AKSI TAMPILKAN CURRENT BOARD
