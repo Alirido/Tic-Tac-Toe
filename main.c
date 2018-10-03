@@ -74,9 +74,9 @@ void viewBoard(int cs) {
 		int i=1;
 		while (tf[cs].state[i] != 'c') {
 			board[tf[cs].state[i] - '0'] = 'X';
+			i++;
 		}
-		i++;
-		for (i; i<strlen(tf[cs].state); i++) {
+		for (++i; i<strlen(tf[cs].state); i++) {
 			board[tf[cs].state[i] - '0'] = 'O';
 		}
 		printf("\t\t\t  %c | %c  | %c  \n", board[1], board[2], board[3]); 
@@ -95,8 +95,8 @@ bool isValid(int x, int current_state) {
 
 		while (x != (tf[current_state].state[n] - '0') && n>=0) n--;
 		if (n>=0)
-			return true;
-		else return false;
+			return false;
+		else return true;
 	}
 }
 
@@ -208,12 +208,16 @@ int main() {
 		i++;
 	}
 
+	// Result Declaration
 	if (tf[current_state].fs == 1) {
-		printf("Well played! Unfortunately, Computer has won\n");
+		printf("\t\t\t --------------------------------------------\n");
+		printf("\t\t\t|Well played! Unfortunately, Computer has won\n");
 	} else {
-		printf("DRAW. You were doing great\n");
+		printf("\t\t\t --------------------------\n");
+		printf("\t\t\t|DRAW. You were doing great\n");
 	}
-	printf("Try again later :)\n\n");
+	printf("\t\t\t|Try again later :)\n");
+	printf("\t\t\t ------------------\n\n");
 	
 	printf("States that have been passed:\n");
 	for (int j=0; j<i; j++) {
