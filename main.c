@@ -29,6 +29,10 @@ int hashing(char temp[]) { // String to int (hashing)
 	return result;
 }
 
+bool isWin(char temp[]) {
+	// Kemaren kenapa dihapus, padahal dipake :(
+}
+
 void showInstructions() {
 	printf("\t\t\t  Tic-Tac-Toe\n\n"); 
     printf("Choose a cell numbered from 1 to 9 as below"
@@ -74,7 +78,7 @@ int main() {
 	// READ TEXT FILE (EXTERNAL) and Translate to machine logic
 	FILE *fp; // fp = file pointer
 	
-	if ((fp = fopen("DFA.TXT", "r")) == null) {
+	if ((fp = fopen("DFA.TXT", "r")) == NULL) {
 		printf("ERROR - Could not open the DFA.txt file\n");
 		return 1;
 	}
@@ -83,14 +87,14 @@ int main() {
 	while (c != EOF) {
 		int i=0;
 		char s[22];
-		while ((c = fgetc()) != ':') {
+		while ((c = fgetc(fp)) != ':') {
 			s[i] = c;
 			i++;
 		}
-		c = fgetc();
+		c = fgetc(fp);
 		if (s == "Transition function") {
 			while (c != EOF) {
-				if ((c = fgetc()) != '*') {
+				if ((c = fgetc(fp)) != '*') {
 					int j=0, idx;
 					while (c != '\n' && c != EOF) {
 						char tmp[13];
@@ -98,7 +102,7 @@ int main() {
 						while (c != ' ' && c != '\n' && c != EOF) {
 							tmp[i] = c;
 							i++;
-							c = fgetc();
+							c = fgetc(fp);
 						}
 						if (!j) {
 							idx = hashing(tmp);
@@ -109,15 +113,15 @@ int main() {
 						}
 						j++;
 						if (c==' ')
-							c = fgetc();
+							c = fgetc(fp);
 					}
-				} else while ((c = fgetc()) != '\n');
+				} else while ((c = fgetc(fp)) != '\n');
 			}
 		} else if (s == "State akhir") {
 			while (c != '\n') {
 				char tmp[13];
 				i=0;
-				while ((c = fgetc()) != ' ' && c != '\n') {
+				while ((c = fgetc(fp)) != ' ' && c != '\n') {
 					tmp[i] = c;
 					i++;
 				}
@@ -131,7 +135,7 @@ int main() {
 				strcpy(tf[idx].state, tmp);
 			}
 		} else {
-			while ((c = fgetc()) != '\n');
+			while ((c = fgetc(fp)) != '\n');
 		}
 	}
 
@@ -169,7 +173,7 @@ int main() {
 	}
 	printf("Try again later :)\n\n");
 	
-	printf("States that have been passed:\n")
+	printf("States that have been passed:\n");
 	for (int j=0; j<i; j++) {
 		printf("%s ", tf[trackRecord[j]].state);
 	}
