@@ -21,7 +21,7 @@ struct TransitionFunction {
 int hashing(char temp[]) { // String to int (hashing)
 	int i=1;
 	int result = 0;
-	if (temp != "qo" || temp != "0") {
+	if (strcmp(temp,"q0") && strcmp(temp,"0")) {
 		while (temp[i] != 'c') {
 			result = (temp[i]-'0') + result*10;
 			i++;
@@ -32,10 +32,11 @@ int hashing(char temp[]) { // String to int (hashing)
 
 bool isWin(char temp[]) {
 	// Kemaren kenapa dihapus, padahal dipake :(
-	int cell[10];
+	bool cell[10] = {false};
 	int n = strlen(temp)-1;
 	while (temp[n] != 'c') {
 		cell[temp[n] - '0'] = true;
+		n--;
 	}
 	if ((cell[1] && cell[2] && cell[3]) || (cell[4] && cell[5] && cell[6]) ||
 		(cell[7] && cell[8] && cell[9]) || (cell[1] && cell[4] && cell[7]) ||
@@ -63,7 +64,7 @@ void showInstructions() {
 
 void viewBoard(int cs) {
 	char board[10] = {' '};
-	if (tf[cs].state == "qo") {
+	if (!strcmp(tf[cs].state, "q0")) {
 		printf("\t\t\t    |    |    \n"); 
     	printf("\t\t\t--------------\n"); 
     	printf("\t\t\t    |    |    \n"); 
@@ -116,8 +117,11 @@ int main() {
 			s[i] = c;
 			i++;
 		}
-		c = fgetc(fp);
-		if (s == "Transition function") {
+		s[i] = '\0';
+		printf("%s\n", s);
+		if (!strcmp(s, "Transition function")) {
+			printf("MASUK TRANSITION FUNCTION NGGA?\n");
+			c = fgetc(fp);
 			while (c != EOF) {
 				if ((c = fgetc(fp)) != '*') {
 					int j=0, idx;
@@ -140,26 +144,46 @@ int main() {
 						if (c==' ')
 							c = fgetc(fp);
 					}
-				} else while ((c = fgetc(fp)) != '\n');
+				} else {
+					printf("FINAL STATEEE!\n");
+					while ((c = fgetc(fp)) != '\n');
+				}
 			}
-		} else if (s == "State akhir") {
+		} else if (!strcmp(s, "State akhir")) {
+
+			c = fgetc(fp);
+
 			while (c != '\n') {
 				char tmp[13];
 				i=0;
-				while ((c = fgetc(fp)) != ' ' && c != '\n') {
+
+				c = fgetc(fp);
+				while (c != ' ' && c != '\n') {
 					tmp[i] = c;
 					i++;
+					c = fgetc(fp);
 				}
+				tmp[i] = '\0';
+
 				int idx = hashing(tmp);
 				if (isWin(tmp)) {
+
+					//Debugging
+					printf("MENAANGGG!\n");
+
 					tf[idx].fs = 1;
 				}
 				else {
+
+					//Debugging
+					printf("SERIIIII!\n");
+
 					tf[idx].fs = 2;
 				}
 				strcpy(tf[idx].state, tmp);
 			}
 		} else {
+			printf("Debugging #1: %s\n", s);
 			while ((c = fgetc(fp)) != '\n');
 		}
 	}
