@@ -118,21 +118,22 @@ int main() {
 			i++;
 		}
 		s[i] = '\0';
-		printf("%s\n", s);
+
 		if (!strcmp(s, "Transition function")) {
-			printf("MASUK TRANSITION FUNCTION NGGA?\n");
 			c = fgetc(fp);
 			while (c != EOF) {
 				if ((c = fgetc(fp)) != '*') {
 					int j=0, idx;
-					while (c != '\n' && c != EOF) {
+					while (c != '\n') {
 						char tmp[13];
 						i=0;
-						while (c != ' ' && c != '\n' && c != EOF) {
+						while (c != ' ' && c != '\n') {
 							tmp[i] = c;
 							i++;
 							c = fgetc(fp);
 						}
+						tmp[i] = '\0';
+
 						if (!j) {
 							idx = hashing(tmp);
 							strcpy(tf[idx].state, tmp);
@@ -145,8 +146,8 @@ int main() {
 							c = fgetc(fp);
 					}
 				} else {
-					printf("FINAL STATEEE!\n");
-					while ((c = fgetc(fp)) != '\n');
+					c = fgetc(fp);
+					while (c != '\n' && c != EOF) c = fgetc(fp);
 				}
 			}
 		} else if (!strcmp(s, "State akhir")) {
@@ -167,29 +168,21 @@ int main() {
 
 				int idx = hashing(tmp);
 				if (isWin(tmp)) {
-
-					//Debugging
-					printf("MENAANGGG!\n");
-
 					tf[idx].fs = 1;
 				}
 				else {
-
-					//Debugging
-					printf("SERIIIII!\n");
-
 					tf[idx].fs = 2;
 				}
 				strcpy(tf[idx].state, tmp);
 			}
 		} else {
-			printf("Debugging #1: %s\n", s);
 			while ((c = fgetc(fp)) != '\n');
 		}
 	}
 
 	fclose(fp);
 
+	printf("\n\n");
 	// MULAI PERMAINAN TIC TAC TOE
 	showInstructions();
 	int current_state=0;
@@ -205,7 +198,7 @@ int main() {
 			} else {
 				printf("Invalid input - Please enter a number between 1 and 9 (inclusive)\n");
 			}
-			printf("Enter the number: ");
+			printf("\nEnter the number: ");
 			scanf("%d", &x);
 		}
 
