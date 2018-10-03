@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #define bool int
 #define true 1
@@ -31,6 +32,17 @@ int hashing(char temp[]) { // String to int (hashing)
 
 bool isWin(char temp[]) {
 	// Kemaren kenapa dihapus, padahal dipake :(
+	int cell[10];
+	int n = strlen(temp)-1;
+	while (temp[n] != 'c') {
+		cell[temp[n] - '0'] = true;
+	}
+	if ((cell[1] && cell[2] && cell[3]) || (cell[4] && cell[5] && cell[6]) ||
+		(cell[7] && cell[8] && cell[9]) || (cell[1] && cell[4] && cell[7]) ||
+		(cell[2] && cell[5] && cell[8]) || (cell[3] && cell[6] && cell[9]) ||
+		(cell[1] && cell[5] && cell[9]) || (cell[3] && cell[5] && cell[7]))
+		return true;
+	else return false;
 }
 
 void showInstructions() {
@@ -72,6 +84,10 @@ void viewBoard(int cs) {
    		printf("\t\t\t--------------\n"); 
    		printf("\t\t\t  %c | %c  | %c  \n\n", board[7], board[8], board[9]);
 	}
+}
+
+bool isValid(int x) {
+	
 }
 
 int main() {
