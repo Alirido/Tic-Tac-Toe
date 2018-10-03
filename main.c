@@ -19,9 +19,9 @@ struct TransitionFunction {
 
 int hashing(char temp[]) { // String to int (hashing)
 	int i=1;
-	result = 0;
-	if (temp != "qo" || temp != '0') {
-		while (temp[i] != 'c' ||) {
+	int result = 0;
+	if (temp != "qo" || temp != "0") {
+		while (temp[i] != 'c') {
 			result = (temp[i]-'0') + result*10;
 			i++;
 		}
@@ -59,7 +59,7 @@ void viewBoard(int cs) {
 			board[tf[cs].state[i] - '0'] = 'X';
 		}
 		i++;
-		for (i; i<tf[cs].state.length(); i++) {
+		for (i; i<strlen(tf[cs].state); i++) {
 			board[tf[cs].state[i] - '0'] = 'O';
 		}
 		printf("\t\t\t  %c | %c  | %c  \n", board[1], board[2], board[3]); 
