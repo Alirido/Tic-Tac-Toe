@@ -54,6 +54,14 @@ void viewBoard(int cs) {
     	printf("\t\t\t--------------\n"); 
     	printf("\t\t\t    |    |    \n\n"); 
 	} else {
+		int i=1;
+		while (tf[cs].state[i] != 'c') {
+			board[tf[cs].state[i] - '0'] = 1;
+		}
+		i++;
+		for (i; i<tf[cs].state.length(); i++) {
+			board[tf[cs].state[i] - '0'] = 2;
+		}
 		
 	}
 }
