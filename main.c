@@ -86,8 +86,12 @@ void viewBoard(int cs) {
 	}
 }
 
-bool isValid(int x) {
-	
+bool isValid(int x, int current_state) {
+	if (x<1 || x>9)
+		return false;
+	else {
+		int n = strlen(tf[current_state].state)
+	}
 }
 
 int main() {
@@ -166,7 +170,7 @@ int main() {
 	while (tf[current_state].fs != 1 && tf[current_state].fs != 2) {
 		printf("Enter the number: ");
 		scanf("%d", &x);
-		while (!isValid(x)) {
+		while (!isValid(x, current_state)) {
 			if (x>=1 && x<=9) {
 				printf("The cell number was already filled\n");
 			} else {
