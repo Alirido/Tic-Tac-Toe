@@ -90,7 +90,12 @@ bool isValid(int x, int current_state) {
 	if (x<1 || x>9)
 		return false;
 	else {
-		int n = strlen(tf[current_state].state)
+		int n = strlen(tf[current_state].state)-1;
+
+		while (x != (tf[current_state].state[n] - '0') && n>=0) n--;
+		if (n>=0)
+			return true;
+		else return false;
 	}
 }
 
