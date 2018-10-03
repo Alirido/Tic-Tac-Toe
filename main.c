@@ -45,6 +45,19 @@ void showInstructions() {
     printf("-\t-\t-\t-\t-\t-\t-\t-\t-\t-\n\n"); 
 }
 
+void viewBoard(int cs) {
+	int board[10] = {0};
+	if (tf[cs].state == "qo") {
+		printf("\t\t\t    |    |    \n"); 
+    	printf("\t\t\t--------------\n"); 
+    	printf("\t\t\t    |    |    \n"); 
+    	printf("\t\t\t--------------\n"); 
+    	printf("\t\t\t    |    |    \n\n"); 
+	} else {
+		
+	}
+}
+
 int main() {
 	// READ TEXT FILE (EXTERNAL) and Translate to machine logic
 	FILE *fp; // fp = file pointer
