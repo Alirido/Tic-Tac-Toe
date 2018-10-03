@@ -210,14 +210,14 @@ int main() {
 
 	// Result Declaration
 	if (tf[current_state].fs == 1) {
-		printf("\t\t\t --------------------------------------------\n");
-		printf("\t\t\t|Well played! Unfortunately, Computer has won\n");
+		printf("\t\t ---------------------------------------------\n");
+		printf("\t\t|Well played! Unfortunately, Computer has won |\n");
 	} else {
-		printf("\t\t\t --------------------------\n");
-		printf("\t\t\t|DRAW. You were doing great\n");
+		printf("\t\t ---------------------------------------------\n");
+		printf("\t\t|DRAW. You were doing great                   |\n");
 	}
-	printf("\t\t\t|Try again later :)\n");
-	printf("\t\t\t ------------------\n\n");
+	printf("\t\t|Try again later :)                           |\n");
+	printf("\t\t ---------------------------------------------\n\n");
 	
 	printf("States that have been passed:\n");
 	for (int j=0; j<i; j++) {
