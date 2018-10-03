@@ -46,7 +46,7 @@ void showInstructions() {
 }
 
 void viewBoard(int cs) {
-	int board[10] = {0};
+	char board[10] = {' '};
 	if (tf[cs].state == "qo") {
 		printf("\t\t\t    |    |    \n"); 
     	printf("\t\t\t--------------\n"); 
@@ -56,17 +56,17 @@ void viewBoard(int cs) {
 	} else {
 		int i=1;
 		while (tf[cs].state[i] != 'c') {
-			board[tf[cs].state[i] - '0'] = 1;
+			board[tf[cs].state[i] - '0'] = 'X';
 		}
 		i++;
 		for (i; i<tf[cs].state.length(); i++) {
-			board[tf[cs].state[i] - '0'] = 2;
+			board[tf[cs].state[i] - '0'] = 'O';
 		}
-		printf("\t\t\t    |    |    \n"); 
-    	printf("\t\t\t--------------\n"); 
-    	printf("\t\t\t    |    |    \n"); 
-    	printf("\t\t\t--------------\n"); 
-    	printf("\t\t\t    |    |    \n\n");
+		printf("\t\t\t  %c | %c  | %c  \n", board[1], board[2], board[3]); 
+   		printf("\t\t\t--------------\n"); 
+   		printf("\t\t\t  %c | %c  | %c  \n", board[4], board[5], board[6]); 
+   		printf("\t\t\t--------------\n"); 
+   		printf("\t\t\t  %c | %c  | %c  \n\n", board[7], board[8], board[9]);
 	}
 }
 
