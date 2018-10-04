@@ -31,7 +31,7 @@ int hashing(char temp[]) { // String to int (hashing)
 }
 
 bool isWin(char temp[]) {
-	// Kemaren kenapa dihapus, padahal dipake :(
+	
 	bool cell[10] = {false};
 	int n = strlen(temp)-1;
 	while (temp[n] != 'c') {
@@ -60,6 +60,7 @@ void showInstructions() {
     printf("Computer will play as O.\n");
       
     printf("-\t-\t-\t-\t-\t-\t-\t-\t-\t-\n\n"); 
+    printf("\t\t\t    START\n\n");
 }
 
 void viewBoard(int cs) {
@@ -182,7 +183,7 @@ int main() {
 
 	fclose(fp);
 
-	printf("\n\n");
+	printf("\n");
 	// MULAI PERMAINAN TIC TAC TOE
 	showInstructions();
 	int current_state=0;
